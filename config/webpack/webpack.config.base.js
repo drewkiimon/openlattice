@@ -1,22 +1,21 @@
 /* eslint-disable no-underscore-dangle, import/no-extraneous-dependencies, import/extensions */
 
-import Webpack from 'webpack';
+import Webpack from "webpack";
 
-import PACKAGE from '../../package.json';
+import PACKAGE from "../../package.json";
 
-import APP_CONFIG from '../app/app.config.js';
-import APP_PATHS from '../app/paths.config.js';
+import APP_CONFIG from "../app/app.config.js";
+import APP_PATHS from "../app/paths.config.js";
 
-import { ifDev, ifMin, isDev, isProd, isTest } from '../app/env.config.js';
-import { AUTH0_CLIENT_ID, AUTH0_DOMAIN } from '../auth/auth0.config.js';
+import { ifDev, ifMin, isDev, isProd, isTest } from "../app/env.config.js";
+import { AUTH0_CLIENT_ID, AUTH0_DOMAIN } from "../auth/auth0.config.js";
 
 export default function baseWebpackConfig(env) {
-
   /*
    * constants
    */
 
-  const BASE_PATH = `/${env.basePath || 'app'}/`;
+  const BASE_PATH = `/${env.basePath || "app"}/`;
 
   /*
    * loaders
@@ -25,22 +24,21 @@ export default function baseWebpackConfig(env) {
   const BABEL_LOADER = {
     test: /\.js$/,
     exclude: /node_modules/,
-    include: [
-      APP_PATHS.ABS.SOURCE,
-      APP_PATHS.ABS.TEST
-    ],
-    use: ['babel-loader']
+    include: [APP_PATHS.ABS.SOURCE, APP_PATHS.ABS.TEST],
+    use: ["babel-loader"]
   };
 
   const FILE_LOADER_ASSETS_IMAGES = {
     test: /\.(gif|ico|jpg|jpeg|png|svg|webp)(\?.*)?$/,
     exclude: /node_modules/,
-    use: [{
-      loader: 'file-loader',
-      options: {
-        name: `${APP_PATHS.REL.STATIC_ASSETS_IMAGES}/[name].[hash:8].[ext]`
+    use: [
+      {
+        loader: "file-loader",
+        options: {
+          name: `${APP_PATHS.REL.STATIC_ASSETS_IMAGES}/[name].[hash:8].[ext]`
+        }
       }
-    }]
+    ]
   };
 
   /*
@@ -69,15 +67,10 @@ export default function baseWebpackConfig(env) {
 
   return {
     bail: true,
-    entry: [
-      APP_PATHS.ABS.APP_ENTRY
-    ],
-    mode: ifDev('development', 'production'),
+    entry: [APP_PATHS.ABS.APP_ENTRY],
+    mode: ifDev("development", "production"),
     module: {
-      rules: [
-        BABEL_LOADER,
-        FILE_LOADER_ASSETS_IMAGES
-      ]
+      rules: [BABEL_LOADER, FILE_LOADER_ASSETS_IMAGES]
     },
     optimization: {
       minimize: ifMin(true, false)
@@ -89,19 +82,13 @@ export default function baseWebpackConfig(env) {
     performance: {
       hints: false // disable performance hints for now
     },
-    plugins: [
-      DEFINE_PLUGIN,
-      BANNER_PLUGIN
-    ],
+    plugins: [DEFINE_PLUGIN, BANNER_PLUGIN],
     resolve: {
-      extensions: ['.js', '.css'],
-      modules: [
-        APP_PATHS.ABS.SOURCE,
-        APP_PATHS.ABS.NODE
-      ]
+      extensions: [".js", ".css"],
+      modules: [APP_PATHS.ABS.SOURCE, APP_PATHS.ABS.NODE]
     },
     node: {
-      net: 'empty'
+      net: "empty"
     }
   };
 }
