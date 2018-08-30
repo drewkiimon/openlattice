@@ -87,6 +87,8 @@
     "webpack-dev-server": "^3.1.0"
   },
   "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
     "app": "better-npm-run webpack-dev-server",
     "build:prod": "better-npm-run build:prod",
     "clean": "rimraf build/*",
