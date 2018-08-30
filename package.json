@@ -1,0 +1,113 @@
+{
+  "name": "lets-react",
+  "version": "0.0.0",
+  "homepage": "https://github.com/openlattice/lets-react",
+  "description":
+    "a bootstrapped project to serve as a starting point for a new ReactJS app",
+  "author": {
+    "name": "OpenLattice, Inc.",
+    "email": "support@openlattice.com",
+    "url": "https://openlattice.com"
+  },
+  "contributors": [
+    {
+      "name": "Hristo Oskov",
+      "email": "hristo@openlattice.com"
+    }
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/openlattice/lets-react.git"
+  },
+  "bugs": {
+    "url": "https://github.com/openlattice/lets-react/issues"
+  },
+  "license": "Apache-2.0",
+  "dependencies": {
+    "babel-polyfill": "^6.26.0",
+    "history": "^4.7.2",
+    "immutable": "4.0.0-rc.9",
+    "jwt-decode": "^2.2.0",
+    "lattice": "^0.37.0",
+    "lattice-auth": "^0.7.0",
+    "lattice-sagas": "^0.4.0",
+    "lodash": "^4.17.10",
+    "loglevel": "^1.6.1",
+    "moment": "^2.22.0",
+    "polished": "^2.0.1",
+    "react": "^16.4.0",
+    "react-dom": "^16.4.0",
+    "react-redux": "^5.0.6",
+    "react-router": "^4.2.0",
+    "react-router-dom": "^4.2.2",
+    "react-router-redux": "^5.0.0-alpha.9",
+    "redux": "^4.0.0",
+    "redux-immutable": "^4.0.0",
+    "redux-reqseq": "^0.1.1",
+    "redux-saga": "^0.16.0",
+    "styled-components": "^3.4.0"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.0",
+    "babel-eslint": "^8.2.1",
+    "babel-loader": "^7.1.0",
+    "babel-plugin-styled-components": "^1.2.0",
+    "babel-plugin-transform-class-properties": "^6.24.0",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-preset-env": "^1.6.0",
+    "babel-preset-flow": "^6.23.0",
+    "babel-preset-react": "^6.24.0",
+    "better-npm-run": "0.1.1",
+    "enzyme": "^3.4.4",
+    "enzyme-adapter-react-16": "^1.2.0",
+    "eslint": "^5.0.0",
+    "eslint-config-airbnb": "^17.1.0",
+    "eslint-import-resolver-webpack": "^0.10.0",
+    "eslint-loader": "^2.0.0",
+    "eslint-plugin-flowtype": "^2.50.0",
+    "eslint-plugin-import": "^2.14.0",
+    "eslint-plugin-jest": "^21.21.0",
+    "eslint-plugin-jsx-a11y": "^6.1.0",
+    "eslint-plugin-react": "^7.11.0",
+    "file-loader": "^1.1.5",
+    "flow-bin": "^0.79.0",
+    "html-webpack-plugin": "^3.0.6",
+    "jest": "^23.5.0",
+    "npm-run-all": "^4.0.0",
+    "rimraf": "^2.6.0",
+    "stylelint": "^9.5.0",
+    "stylelint-config-standard": "^18.0.0",
+    "stylelint-config-styled-components": "^0.1.1",
+    "stylelint-processor-styled-components": "^1.2.2",
+    "webpack": "^4.16.0",
+    "webpack-cli": "^3.1.0",
+    "webpack-dev-server": "^3.1.0"
+  },
+  "scripts": {
+    "app": "better-npm-run webpack-dev-server",
+    "build:prod": "better-npm-run build:prod",
+    "clean": "rimraf build/*",
+    "flow": "flow",
+    "lint": "npm-run-all lint:css lint:js",
+    "lint:css": "stylelint './src/**/*.js'",
+    "lint:js": "eslint --config .eslintrc src",
+    "test": "jest --config config/jest/jest.config.js",
+    "test:watch": "jest --config config/jest/jest.config.js --watch"
+  },
+  "betterScripts": {
+    "build:prod": {
+      "command": "webpack --config config/webpack/webpack.config.babel.js",
+      "env": {
+        "BUILD": "production"
+      }
+    },
+    "webpack-dev-server": {
+      "command":
+        "webpack-dev-server --config config/webpack/webpack.config.babel.js",
+      "env": {
+        "BUILD": "development"
+      }
+    }
+  }
+}
