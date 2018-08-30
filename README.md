@@ -1,3 +1,3 @@
-# lets-react
+# OpenLattice
 
-[![Greenkeeper badge](https://badges.greenkeeper.io/openlattice/lets-react.svg)](https://greenkeeper.io/)
+Welcome to my rendition of OpenLattice's EDM project.
