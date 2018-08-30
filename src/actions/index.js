@@ -3,6 +3,7 @@ import axios from "axios";
 export const GET_PROPERTIES = "get_properties";
 export const GET_ENTITIES = "get_entities";
 export const GET_ASSOCIATIONS = "get_associations";
+export const SELECT_EDM = "select_edm";
 
 const BASE_URL = "https://api.openlattice.com/datastore/edm/";
 const TYPE = "type";
@@ -33,5 +34,12 @@ export function getAssociations() {
   return {
     type: GET_ASSOCIATIONS,
     payload: request
+  };
+}
+
+export function selectEDM(edm) {
+  return {
+    type: SELECT_EDM,
+    payload: edm
   };
 }
