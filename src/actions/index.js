@@ -7,7 +7,6 @@ export const GET_ASSOCIATIONS = "get_associations";
 const BASE_URL = "https://api.openlattice.com/datastore/edm/";
 const TYPE = "type";
 
-// Get properties
 export function getProperties() {
   const request = axios.get(`${BASE_URL}property/${TYPE}`);
 
@@ -28,7 +27,7 @@ export function getEntities() {
 }
 
 // Get associations
-export function getassociations() {
+export function getAssociations() {
   const request = axios.get(`${BASE_URL}association/${TYPE}`);
 
   return {

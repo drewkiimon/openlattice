@@ -12,11 +12,11 @@ const initialState = {
 export default function(state = initialState, action) {
   switch (action.type) {
     case GET_PROPERTIES:
-      return { ...state };
+      return { ...state, properties: action.payload.data };
     case GET_ENTITIES:
-      return { ...state };
+      return { ...state, entities: action.payload.data };
     case GET_ASSOCIATIONS:
-      return { ...state };
+      return { ...state, associations: action.payload.data };
     default:
       return state;
   }

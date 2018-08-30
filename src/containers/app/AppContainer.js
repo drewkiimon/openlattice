@@ -3,7 +3,7 @@
  */
 
 import React from "react";
-import Test from "../../components/Test";
+import OpenWrapper from "../../components/OpenWrapper";
 
 import styled from "styled-components";
 import { AuthActionFactory } from "lattice-auth";
@@ -87,7 +87,7 @@ const AppContainer = ({ actions }: Props) => (
         <StyledActionButton onClick={actions.logout}>Logout</StyledActionButton>
       </AppHeaderInnerWrapper>
     </AppHeaderOuterWrapper>
-    <Test />
+    <OpenWrapper />
   </AppWrapper>
 );
 

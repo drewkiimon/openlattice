@@ -6,9 +6,9 @@ import "babel-polyfill";
 
 import React from "react";
 import ReactDOM from "react-dom";
-import { createStore } from "redux";
+import { createStore, applyMiddleware } from "redux";
+import promise from "redux-promise";
 import reducers from "./reducers";
-import Test from "./components/Test";
 
 import LatticeAuth from "lattice-auth";
 import { normalize } from "polished";
@@ -73,25 +73,10 @@ LatticeAuth.configure({
  * !!! MUST HAPPEN FIRST !!!
  */
 
-const routerHistory = initializeRouterHistory();
-const reduxStore = initializeReduxStore(routerHistory);
-const myStore = createStore(reducers);
-// <Provider store={createStore(reducers)}>
-// <Provider store={reduxStore}>
-/*
-<Provider store={createStore(reducers)}>
-  <Test />
-</Provider>
-*/
-/*
-<Provider store={reduxStore}>
-  <ConnectedRouter history={routerHistory}>
-    <AuthRoute path={Routes.ROOT} component={AppContainer} />
-  </ConnectedRouter>
-</Provider>,
-*/
+const createStoreWithMiddleware = applyMiddleware(promise)(createStore);
+
 ReactDOM.render(
-  <Provider store={createStore(reducers)}>
+  <Provider store={createStoreWithMiddleware(reducers)}>
     <AppContainer />
   </Provider>,
   document.getElementById("app")
