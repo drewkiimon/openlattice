@@ -14,7 +14,6 @@ const initialState = {
   gotAssociations: false,
   focusedProperty: [],
   focusedEntity: [],
-  focusedAssociation: [],
   selectedEDM: null
 };
 

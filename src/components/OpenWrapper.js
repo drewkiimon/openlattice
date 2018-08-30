@@ -12,6 +12,7 @@ import {
 // Custom Components
 import Loading from "./Loading";
 import Filter from "./Filter";
+import TableView from "./TableView";
 
 const options = [
   { value: "properties", label: "Properties" },
@@ -31,18 +32,11 @@ class OpenWrapper extends Component {
     this.props.getAssociations();
   }
 
-  componentDidUpdate(prevProps) {
-    if (this.props !== prevProps) {
-      console.log("Updated", this.props.open);
-    }
-  }
-
   handleChange = selectedEDM => {
     // Set into state our selected EDM
     this.setState({ selectedOption: selectedEDM });
-    // Set into Redux State
+    // Set into Redux Store
     this.props.selectEDM(selectedEDM.value);
-    console.log("option chose:", this.props.open.selectedEDM);
   };
 
   render() {
@@ -54,19 +48,30 @@ class OpenWrapper extends Component {
       selectedEDM
     } = this.props.open;
     const isDataReady = gotProperties && gotEntities && gotAssociations;
-    //          <Filter />
+
     return (
       <div className="h-100">
         <div className="container-fluid h-100">
           {isDataReady ? (
             <div className="row h-100">
               <div className="col-5 offset-1 h-100 p-3">
-                <h2 className="text-center">EDM</h2>
-                <Select
-                  value={selectedOption}
-                  onChange={this.handleChange}
-                  options={options}
-                />
+                <div className="row">
+                  <div className="col">
+                    <h2 className="text-center">EDM</h2>
+                  </div>
+                </div>
+                <div className="row">
+                  <div className="col">
+                    <Select
+                      value={selectedOption}
+                      onChange={this.handleChange}
+                      options={options}
+                    />
+                  </div>
+                </div>
+
+                <Filter />
+                <TableView />
               </div>
               <div className="col-5 h-100 p-3">
                 <div className="text-center">Two Boy</div>

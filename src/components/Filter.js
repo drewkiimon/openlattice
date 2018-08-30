@@ -6,15 +6,22 @@ import { connect } from "react-redux";
 class Filter extends Component {
   constructor(props) {
     super(props);
-    this.state = { selected: null };
+    this.state = { selectedOption: null };
   }
 
-  handleChange = filter => {
-    this.setState({ selected: filter.label });
-    console.log("option chose:", this.state.selected);
+  componentDidUpdate(prevProps) {
+    // If the user selects a different EDM, we reload filter
+    if (prevProps.open.selectedEDM !== this.props.open.selectedEDM) {
+      this.setState({ selectedOption: null });
+    }
+  }
+
+  handleChange = selectedOption => {
+    this.setState({ selectedOption });
   };
 
   render() {
+    const { selectedOption } = this.state;
     const { selectedEDM, associations, entities, properties } = this.props.open;
     var data = null;
     if (!selectedEDM) {
@@ -22,30 +29,33 @@ class Filter extends Component {
       var options = data;
     } else if (selectedEDM === "associations") {
       data = associations;
+      var options = data.map(item => {
+        return { value: item.entityType.id, label: item.entityType.title };
+      });
     } else if (selectedEDM === "entities") {
       data = entities;
+      var options = data.map(item => {
+        return { value: item.id, label: item.title };
+      });
     } else if (selectedEDM === "properties") {
       data = properties;
-    }
-
-    if (selectedEDM) {
       var options = data.map(item => {
         return { value: item.id, label: item.title };
       });
     }
 
-    console.log("Filter EDM:", selectedEDM);
-    console.log(options);
     return (
-      <div>
-        <h4>Filter</h4>
-        <Select
-          value={this.state.selected}
-          isSearchable={true}
-          onChange={this.handleChange}
-          options={options}
-          isClearable={true}
-        />
+      <div className="row">
+        <div className="col">
+          <h4>Filter</h4>
+          <Select
+            value={selectedOption}
+            onChange={this.handleChange}
+            options={options}
+            isSearchable={true}
+            isClearable={true}
+          />
+        </div>
       </div>
     );
   }
