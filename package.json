@@ -2,8 +2,7 @@
   "name": "lets-react",
   "version": "0.0.0",
   "homepage": "https://www.andrewpagan.me/openlattice",
-  "description":
-    "a bootstrapped project to serve as a starting point for a new ReactJS app",
+  "description": "a bootstrapped project to serve as a starting point for a new ReactJS app",
   "author": {
     "name": "OpenLattice, Inc.",
     "email": "support@openlattice.com",
@@ -43,6 +42,7 @@
     "react-router": "^4.2.0",
     "react-router-dom": "^4.2.2",
     "react-router-redux": "^5.0.0-alpha.9",
+    "react-scripts": "^1.1.5",
     "redux": "^4.0.0",
     "redux-immutable": "^4.0.0",
     "redux-reqseq": "^0.1.1",
@@ -109,8 +109,7 @@
       }
     },
     "webpack-dev-server": {
-      "command":
-        "webpack-dev-server --config config/webpack/webpack.config.babel.js",
+      "command": "webpack-dev-server --config config/webpack/webpack.config.babel.js",
       "env": {
         "BUILD": "development"
       }
