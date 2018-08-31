@@ -1,6 +1,15 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import styled from "styled-components";
 import { selectEDM, hasFocus, setFocused } from "../actions";
+
+const Link = styled.span`
+  color: #0645ad;
+  font-weight: bold;
+  &:hover {
+    cursor: pointer;
+  }
+`;
 
 class Property extends Component {
   constructor(props) {
@@ -36,7 +45,11 @@ class Property extends Component {
     const { found, data, type } = this.state;
     if (found) {
     }
-    return <li onClick={this.handleClick}>{found ? data.title : "No"}</li>;
+    return (
+      <li onClick={this.handleClick}>
+        {found ? <Link>{data.title}</Link> : "No"}
+      </li>
+    );
   }
 }
 

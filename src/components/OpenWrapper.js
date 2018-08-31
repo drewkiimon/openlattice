@@ -34,11 +34,11 @@ class OpenWrapper extends Component {
   }
 
   handleChange = selectedEDM => {
-    // Set into state our selected EDM
-    this.setState({ selectedOption: selectedEDM });
     // Set into Redux Store
     this.props.hasFocus(false);
     this.props.selectEDM(selectedEDM.value);
+    // Set into state our selected EDM
+    this.setState({ selectedOption: selectedEDM });
   };
 
   render() {

@@ -58,7 +58,9 @@ class DetailedView extends Component {
     } else if (type === ENTITY) {
       const { key, properties } = data;
       const keyValues = key.map(item => <Property key={item} id={item} />);
-      const propertyValues = properties.map(item => <li key={item}>{item}</li>);
+      const propertyValues = properties.map(item => (
+        <Property key={item} id={item} />
+      ));
       return (
         <div>
           <EDMTitle>Entity Type</EDMTitle>
