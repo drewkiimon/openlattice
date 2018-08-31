@@ -35,6 +35,12 @@ const HorizontalLine = styled.hr`
   margin: 0.25em 0;
 `;
 
+const TableValues = styled.div`
+  max-height: 100px;
+  min-height: 33px;
+  overflow-y: scroll;
+`;
+
 class DetailedView extends Component {
   generateView(data, type) {
     if (type === PROPERTY) {
@@ -107,9 +113,17 @@ class DetailedView extends Component {
           <SmallDetail>Description</SmallDetail>
           <p>{data.description}</p>
           <SmallDetail>Key</SmallDetail>
-          <ul>{keyValues}</ul>
+          <TableValues className="table-responsive">
+            <table className="table table-sm table-borderless">
+              <tbody>{keyValues}</tbody>
+            </table>
+          </TableValues>
           <SmallDetail>Properties</SmallDetail>
-          <ul>{propertyValues}</ul>
+          <TableValues className="table-responsive">
+            <table className="table table-sm table-borderless">
+              <tbody>{propertyValues}</tbody>
+            </table>
+          </TableValues>
         </div>
       );
     } else if (type === ASSOCIATION) {
@@ -154,9 +168,17 @@ class DetailedView extends Component {
           <SmallDetail>Description</SmallDetail>
           <p>{entityType.description}</p>
           <SmallDetail>Key</SmallDetail>
-          <ul>{keyValues}</ul>
+          <TableValues className="table-responsive">
+            <table className="table table-sm table-borderless">
+              <tbody> {keyValues}</tbody>
+            </table>
+          </TableValues>
           <SmallDetail>Properties</SmallDetail>
-          <ul>{propertyValues}</ul>
+          <TableValues className="table-responsive">
+            <table className="table table-sm table-borderless">
+              <tbody>{propertyValues}</tbody>
+            </table>
+          </TableValues>
           <LargerDetail>Sources</LargerDetail>
           <ul>{sources}</ul>
           <LargerDetail>Destinations</LargerDetail>
@@ -169,7 +191,7 @@ class DetailedView extends Component {
   render() {
     const { gotFocused, focused } = this.props.open;
     if (!gotFocused) {
-      return <div>Nothing to show... Yet</div>;
+      return <div />;
     } else {
       const { type, data } = focused;
 

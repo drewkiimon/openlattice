@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import Select from "react-select";
 import styled from "styled-components";
 import { connect } from "react-redux";
-import { setFocused, hasFocus } from "../actions";
+import { setFocused, hasFocus, setFilter } from "../actions";
 
 const InputTitle = styled.h5`
   margin: 0;
@@ -35,6 +35,7 @@ class Filter extends Component {
       const data = properties.filter(item => item.id === id)[0];
       this.props.hasFocus(true);
       this.props.setFocused({ data, type });
+      this.props.setFilter(data);
     } else if (type === ENTITY) {
       const data = entities.filter(item => item.id === id)[0];
       this.props.hasFocus(true);
@@ -101,5 +102,5 @@ const mapStateToProps = state => {
 
 export default connect(
   mapStateToProps,
-  { setFocused, hasFocus }
+  { setFocused, hasFocus, setFilter }
 )(Filter);

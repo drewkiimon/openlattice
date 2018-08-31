@@ -6,7 +6,6 @@ import { connect } from "react-redux";
 const MyDiv = styled.div`
   max-height: 80%;
   overflow-y: scroll;
-  overflow-x: wrap;
   &::-webkit-scrollbar {
     display: none;
   }
@@ -18,7 +17,13 @@ const ASSOCIATION = "associations";
 
 class TableView extends Component {
   render() {
-    const { selectedEDM, associations, entities, properties } = this.props.open;
+    const {
+      selectedEDM,
+      associations,
+      entities,
+      properties,
+      filter
+    } = this.props.open;
     // What data are we going to display?
     if (selectedEDM === PROPERTY) {
       var data = properties.map(item => (
@@ -68,7 +73,7 @@ class TableView extends Component {
               </table>
             </div>
           ) : (
-            "Nothing to see yet"
+            ""
           )}
         </div>
       </MyDiv>

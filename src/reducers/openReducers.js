@@ -5,7 +5,7 @@ import {
   SELECT_EDM,
   SET_FOCUSED,
   HAS_FOCUS,
-  DID_RENDER
+  SET_FILTER
 } from "../actions";
 
 const initialState = {
@@ -18,7 +18,7 @@ const initialState = {
   focused: {},
   gotFocused: false,
   selectedEDM: null,
-  rendered: false
+  filter: null
 };
 
 export default function(state = initialState, action) {
@@ -49,10 +49,10 @@ export default function(state = initialState, action) {
         ...state,
         gotFocused: action.payload
       };
-    case DID_RENDER:
+    case SET_FILTER:
       return {
         ...state,
-        rendered: action.payload
+        filter: action.payload
       };
     default:
       return state;

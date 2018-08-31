@@ -44,9 +44,9 @@ class Property extends Component {
   render() {
     const { found, data, type } = this.state;
     return (
-      <li onClick={this.handleClick}>
-        {found ? <Link>{data.title}</Link> : "No"}
-      </li>
+      <tr onClick={this.handleClick}>
+        <td>{found ? <Link>{data.title}</Link> : "No"}</td>
+      </tr>
     );
   }
 }

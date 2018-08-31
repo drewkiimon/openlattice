@@ -6,6 +6,7 @@ export const GET_ASSOCIATIONS = "get_associations";
 export const SELECT_EDM = "select_edm";
 export const SET_FOCUSED = "set_focused";
 export const HAS_FOCUS = "has_focus";
+export const SET_FILTER = "set_filter";
 
 const BASE_URL = "https://api.openlattice.com/datastore/edm/";
 const TYPE = "type";
@@ -56,6 +57,13 @@ export function setFocused(payload) {
 export function hasFocus(payload) {
   return {
     type: HAS_FOCUS,
+    payload
+  };
+}
+
+export function setFilter(payload) {
+  return {
+    type: SET_FILTER,
     payload
   };
 }
