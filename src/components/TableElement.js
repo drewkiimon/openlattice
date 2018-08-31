@@ -6,7 +6,6 @@ class TableElement extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      type: this.props.type,
       data: this.props.data
     };
     this.handleClick = this.handleClick.bind(this);

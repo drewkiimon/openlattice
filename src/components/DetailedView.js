@@ -26,8 +26,8 @@ class DetailedView extends Component {
     super(props);
     this.generateView = this.generateView.bind(this);
   }
-  generateView(type, data) {
-    console.log("type", type);
+  generateView(data) {
+    const type = this.props.open.selectedEDM;
     if (type === PROPERTY) {
       return (
         <div>
@@ -153,7 +153,7 @@ class DetailedView extends Component {
     } else {
       const { type, data } = focused;
 
-      return <div>{this.generateView(type, data)}</div>;
+      return <div>{this.generateView(data)}</div>;
     }
   }
 }

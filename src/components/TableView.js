@@ -9,36 +9,37 @@ const MyDiv = styled.div`
   overflow-y: scroll;
 `;
 
+const PROPERTY = "properties";
+const ENTITY = "entities";
+const ASSOCIATION = "associations";
+
 class TableView extends Component {
   render() {
     const { selectedEDM, associations, entities, properties } = this.props.open;
     console.log("selectedEDM: ", selectedEDM);
     // What data are we going to display?
-    if (selectedEDM === "properties") {
+    if (selectedEDM === PROPERTY) {
       var data = properties.map(item => (
         <TableElement
           key={item.id}
-          type={selectedEDM}
           title={item.title}
           data={item}
           description={item.description}
         />
       ));
-    } else if (selectedEDM === "entities") {
+    } else if (selectedEDM === ENTITY) {
       var data = entities.map(item => (
         <TableElement
           key={item.id}
-          type={selectedEDM}
           title={item.title}
           data={item}
           description={item.description}
         />
       ));
-    } else if (selectedEDM === "associations") {
+    } else if (selectedEDM === ASSOCIATION) {
       var data = associations.map(item => (
         <TableElement
           key={item.entityType.id}
-          type={selectedEDM}
           title={item.entityType.title}
           data={item}
           description={item.entityType.description}
