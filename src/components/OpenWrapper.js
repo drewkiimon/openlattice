@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Select from "react-select";
 import { connect } from "react-redux";
+import styled from "styled-components";
 import {
   getProperties,
   getEntities,
@@ -20,6 +21,22 @@ const options = [
   { value: "entities", label: "Entities" },
   { value: "associations", label: "Associations" }
 ];
+
+const WrapperDiv = styled.div`
+  height: 92%;
+  background-color: #e0ffff;
+  padding: 0.5em 0;
+`;
+
+const ColumnDiv = styled.div`
+  background-color: white;
+  box-sizing: border-box;
+  border: 1px solid gray;
+  border-radius: 5px;
+  -webkit-box-shadow: 6px 9px 22px -10px rgba(0, 0, 0, 0.69);
+  -moz-box-shadow: 6px 9px 22px -10px rgba(0, 0, 0, 0.69);
+  box-shadow: 6px 9px 22px -10px rgba(0, 0, 0, 0.69);
+`;
 
 class OpenWrapper extends Component {
   constructor(props) {
@@ -52,11 +69,11 @@ class OpenWrapper extends Component {
     const isDataReady = gotProperties && gotEntities && gotAssociations;
 
     return (
-      <div className="h-100">
+      <WrapperDiv>
         <div className="container-fluid h-100">
           {isDataReady ? (
             <div className="row h-100">
-              <div className="col-5 offset-1 h-100 p-3">
+              <ColumnDiv className="col-6 offset-1 h-100 mr-2 p-3">
                 <div className="row">
                   <div className="col">
                     <h2 className="text-center">EDM</h2>
@@ -74,8 +91,8 @@ class OpenWrapper extends Component {
                 </div>
                 <Filter />
                 <TableView />
-              </div>
-              <div className="col-5 h-100 p-3">
+              </ColumnDiv>
+              <ColumnDiv className="col-4 h-100 p-3">
                 <div className="row">
                   <div className="col">
                     <h2 className="text-center">Detailed View</h2>
@@ -86,13 +103,13 @@ class OpenWrapper extends Component {
                     <DetailedView />
                   </div>
                 </div>
-              </div>
+              </ColumnDiv>
             </div>
           ) : (
             <Loading />
           )}
         </div>
-      </div>
+      </WrapperDiv>
     );
   }
 }

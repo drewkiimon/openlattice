@@ -6,6 +6,9 @@ import { connect } from "react-redux";
 const MyDiv = styled.div`
   max-height: 80%;
   overflow-y: scroll;
+  &::-webkit-scrollbar {
+    display: none;
+  }
 `;
 
 const PROPERTY = "properties";
