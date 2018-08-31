@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
+import { setFocused } from "../actions";
 
 class TableElement extends Component {
   constructor(props) {
@@ -11,7 +13,7 @@ class TableElement extends Component {
   }
 
   handleClick() {
-    console.log("id", this.state);
+    this.props.setFocused(this.state);
   }
 
   render() {
@@ -24,4 +26,13 @@ class TableElement extends Component {
   }
 }
 
-export default TableElement;
+const mapStateToProps = state => {
+  return {
+    open: state.open
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  { setFocused }
+)(TableElement);

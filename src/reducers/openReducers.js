@@ -2,7 +2,8 @@ import {
   GET_PROPERTIES,
   GET_ENTITIES,
   GET_ASSOCIATIONS,
-  SELECT_EDM
+  SELECT_EDM,
+  SET_FOCUSED
 } from "../actions";
 
 const initialState = {
@@ -12,8 +13,8 @@ const initialState = {
   gotProperties: false,
   gotEntities: false,
   gotAssociations: false,
-  focusedProperty: [],
-  focusedEntity: [],
+  focused: null,
+  gotFocused: false,
   selectedEDM: null
 };
 
@@ -32,7 +33,14 @@ export default function(state = initialState, action) {
     case SELECT_EDM:
       return {
         ...state,
-        selectedEDM: action.payload
+        selectedEDM: action.payload,
+        gotFocused: false
+      };
+    case SET_FOCUSED:
+      return {
+        ...state,
+        focused: action.payload,
+        gotFocused: true
       };
     default:
       return state;

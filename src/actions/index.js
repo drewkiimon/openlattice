@@ -4,6 +4,7 @@ export const GET_PROPERTIES = "get_properties";
 export const GET_ENTITIES = "get_entities";
 export const GET_ASSOCIATIONS = "get_associations";
 export const SELECT_EDM = "select_edm";
+export const SET_FOCUSED = "set_focused";
 
 const BASE_URL = "https://api.openlattice.com/datastore/edm/";
 const TYPE = "type";
@@ -41,5 +42,12 @@ export function selectEDM(edm) {
   return {
     type: SELECT_EDM,
     payload: edm
+  };
+}
+
+export function setFocused(payload) {
+  return {
+    type: SET_FOCUSED,
+    payload
   };
 }

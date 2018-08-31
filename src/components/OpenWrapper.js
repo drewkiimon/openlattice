@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import Select from "react-select";
-import "./OpenWrapper.css";
 import { connect } from "react-redux";
 import {
   getProperties,
@@ -13,6 +12,7 @@ import {
 import Loading from "./Loading";
 import Filter from "./Filter";
 import TableView from "./TableView";
+import DetailedView from "./DetailedView";
 
 const options = [
   { value: "properties", label: "Properties" },
@@ -69,12 +69,20 @@ class OpenWrapper extends Component {
                     />
                   </div>
                 </div>
-
                 <Filter />
                 <TableView />
               </div>
               <div className="col-5 h-100 p-3">
-                <div className="text-center">Two Boy</div>
+                <div className="row">
+                  <div className="col">
+                    <h2 className="text-center">Detailed View</h2>
+                  </div>
+                </div>
+                <div className="row">
+                  <div className="col">
+                    <DetailedView />
+                  </div>
+                </div>
               </div>
             </div>
           ) : (
