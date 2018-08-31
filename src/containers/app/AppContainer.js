@@ -4,11 +4,13 @@
 
 import React from "react";
 import OpenWrapper from "../../components/OpenWrapper";
+import Namespace from "../../components/namespace/Namespace";
 
 import styled from "styled-components";
 import { AuthActionFactory } from "lattice-auth";
 import { connect } from "react-redux";
-import { Redirect, Route, Switch } from "react-router";
+// import { Redirect, Route, Switch } from "react-router";
+import { BrowserRouter, Route, Switch, Link } from "react-router-dom";
 import { bindActionCreators } from "redux";
 
 import OpenLatticeLogo from "../../assets/images/logo_and_name.png";
@@ -87,7 +89,13 @@ const AppContainer = ({ actions }: Props) => (
         <StyledActionButton onClick={actions.logout}>Logout</StyledActionButton>
       </AppHeaderInnerWrapper>
     </AppHeaderOuterWrapper>
-    <OpenWrapper />
+    <BrowserRouter>
+      <Switch>
+        <Route path="/edm" component={OpenWrapper} />
+        <Route path="/namespace" component={Namespace} />
+        <Route path={Routes.ROOT} component={OpenWrapper} />
+      </Switch>
+    </BrowserRouter>
   </AppWrapper>
 );
 
