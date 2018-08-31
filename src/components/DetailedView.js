@@ -23,13 +23,28 @@ const LargerDetail = styled.h4`
   font-weight: bold;
 `;
 
+const HorizontalLine = styled.hr`
+  border: 0;
+  height: 1px;
+  background-image: linear-gradient(
+    to right,
+    rgba(0, 0, 0, 0),
+    rgba(0, 0, 0, 0.75),
+    rgba(0, 0, 0, 0)
+  );
+  margin: 0.25em 0;
+`;
+
 class DetailedView extends Component {
   generateView(data, type) {
     if (type === PROPERTY) {
       return (
         <div>
           <EDMTitle>Property Type</EDMTitle>
-          <p>An object that serves as a field definition for a dataset.</p>
+          <p className="m-0">
+            An object that serves as a field definition for a dataset.
+          </p>
+          <HorizontalLine />
           <SmallDetail>ID</SmallDetail>
           <p>{data.id}</p>
           {data.type.namespace ? (
@@ -65,7 +80,10 @@ class DetailedView extends Component {
       return (
         <div>
           <EDMTitle>Entity Type</EDMTitle>
-          <p>A collection of Property Types that define a specific dataset.</p>
+          <p className="m-0">
+            A collection of Property Types that define a specific dataset.
+          </p>
+          <HorizontalLine />
           <SmallDetail>ID</SmallDetail>
           <p>{data.id}</p>
           {data.type.namespace ? (
@@ -107,10 +125,11 @@ class DetailedView extends Component {
       return (
         <div>
           <EDMTitle>Association Type</EDMTitle>
-          <p>
+          <p className="m-0">
             An Entity Type that connects one Entity Type, a source, to another
             Entity Type, a destination.
           </p>
+          <HorizontalLine />
           <LargerDetail>Entity Type Details</LargerDetail>
           <SmallDetail>ID</SmallDetail>
           <p>{entityType.id}</p>

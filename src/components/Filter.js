@@ -1,6 +1,12 @@
 import React, { Component } from "react";
 import Select from "react-select";
+import styled from "styled-components";
 import { connect } from "react-redux";
+
+const InputTitle = styled.h5`
+  margin: 0;
+  margin-top: 0.25em;
+`;
 
 // We are going to filter things based off of what EDM was selected
 class Filter extends Component {
@@ -47,7 +53,7 @@ class Filter extends Component {
     return (
       <div className="row">
         <div className="col">
-          <h4>Filter</h4>
+          <InputTitle>Filter</InputTitle>
           <Select
             value={selectedOption}
             onChange={this.handleChange}

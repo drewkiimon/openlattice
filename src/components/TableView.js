@@ -6,6 +6,7 @@ import { connect } from "react-redux";
 const MyDiv = styled.div`
   max-height: 80%;
   overflow-y: scroll;
+  overflow-x: wrap;
   &::-webkit-scrollbar {
     display: none;
   }
@@ -52,7 +53,7 @@ class TableView extends Component {
       ));
     }
     return (
-      <MyDiv className="row check">
+      <MyDiv className="row check mt-1">
         <div className="col">
           {selectedEDM ? (
             <div className="table-responsive">

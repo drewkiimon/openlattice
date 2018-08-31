@@ -38,10 +38,16 @@ const ColumnDiv = styled.div`
   box-shadow: 6px 9px 22px -10px rgba(0, 0, 0, 0.69);
 `;
 
+const InputTitle = styled.h5`
+  margin: 0;
+`;
+
 class OpenWrapper extends Component {
   constructor(props) {
     super(props);
-    this.state = { selectedOption: null };
+    this.state = {
+      selectedOption: null
+    };
   }
 
   componentDidMount() {
@@ -50,12 +56,38 @@ class OpenWrapper extends Component {
     this.props.getAssociations();
   }
 
+  componentDidUpdate() {
+    if (
+      this.state.selectedOption &&
+      this.state.selectedOption.value !== this.props.open.selectedEDM
+    ) {
+      // Set it the same as redux state
+      const { selectedEDM } = this.props.open;
+      if (selectedEDM === "properties") {
+        this.setState({
+          selectedOption: { value: "properties", label: "Properties" }
+        });
+      } else if (selectedEDM === "entities") {
+        this.setState({
+          selectedOption: { value: "entities", label: "Entities" }
+        });
+      } else if (selectedEDM === "associations") {
+        this.setState({
+          selectedOption: { value: "associations", label: "Associations" }
+        });
+      }
+    }
+  }
+
   handleChange = selectedEDM => {
     // Set into Redux Store
     this.props.hasFocus(false);
     this.props.selectEDM(selectedEDM.value);
     // Set into state our selected EDM
-    this.setState({ selectedOption: selectedEDM });
+    this.setState({
+      selectedOption: selectedEDM,
+      selectedOptionLabel: selectedEDM.value
+    });
   };
 
   render() {
@@ -81,7 +113,7 @@ class OpenWrapper extends Component {
                 </div>
                 <div className="row">
                   <div className="col">
-                    <h4>Select EDM</h4>
+                    <InputTitle>Select EDM</InputTitle>
                     <Select
                       value={selectedOption}
                       onChange={this.handleChange}
