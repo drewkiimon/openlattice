@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import styled from "styled-components";
 import Property from "./Property";
+import Entity from "./Entity";
 
 const PROPERTY = "properties";
 const ENTITY = "entities";
@@ -97,10 +98,12 @@ class DetailedView extends Component {
       const { entityType } = data;
       const { key, properties } = entityType;
       const { src, dst } = data;
-      const keyValues = key.map(item => <li key={item}>{item}</li>);
-      const propertyValues = properties.map(item => <li key={item}>{item}</li>);
-      const sources = src.map(item => <li key={item}>{item}</li>);
-      const destinations = dst.map(item => <li key={item}>{item}</li>);
+      const keyValues = key.map(item => <Property key={item} id={item} />);
+      const propertyValues = properties.map(item => (
+        <Property key={item} id={item} />
+      ));
+      const sources = src.map(item => <Entity key={item} id={item} />);
+      const destinations = dst.map(item => <Entity key={item} id={item} />);
       return (
         <div>
           <EDMTitle>Association Type</EDMTitle>

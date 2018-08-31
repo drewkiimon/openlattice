@@ -64,6 +64,7 @@ class OpenWrapper extends Component {
                 </div>
                 <div className="row">
                   <div className="col">
+                    <h4>Select EDM</h4>
                     <Select
                       value={selectedOption}
                       onChange={this.handleChange}

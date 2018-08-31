@@ -11,7 +11,7 @@ const Link = styled.span`
   }
 `;
 
-class Property extends Component {
+class Entity extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -24,11 +24,11 @@ class Property extends Component {
 
   componentDidMount() {
     // Search for the id
-    const allProperties = this.props.open.properties;
-    const property = allProperties.filter(item => item.id === this.props.id);
+    const { entities } = this.props.open;
+    const entity = entities.filter(item => item.id === this.props.id);
     // Set it in state
-    if (property.length === 1) {
-      this.setState({ data: property[0], type: "properties", found: true });
+    if (entity.length === 1) {
+      this.setState({ data: entity[0], type: "entities", found: true });
     }
   }
 
@@ -60,4 +60,4 @@ const mapStateToProps = state => {
 export default connect(
   mapStateToProps,
   { selectEDM, hasFocus, setFocused }
-)(Property);
+)(Entity);
