@@ -5,7 +5,8 @@ import {
   getProperties,
   getEntities,
   getAssociations,
-  selectEDM
+  selectEDM,
+  hasFocus
 } from "../actions";
 
 // Custom Components
@@ -36,6 +37,7 @@ class OpenWrapper extends Component {
     // Set into state our selected EDM
     this.setState({ selectedOption: selectedEDM });
     // Set into Redux Store
+    this.props.hasFocus(false);
     this.props.selectEDM(selectedEDM.value);
   };
 
@@ -102,5 +104,11 @@ const mapStateToProps = state => {
 
 export default connect(
   mapStateToProps,
-  { getProperties, getEntities, getAssociations, selectEDM }
+  {
+    getProperties,
+    getEntities,
+    getAssociations,
+    selectEDM,
+    hasFocus
+  }
 )(OpenWrapper);

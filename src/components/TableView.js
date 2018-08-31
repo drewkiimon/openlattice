@@ -16,7 +16,6 @@ const ASSOCIATION = "associations";
 class TableView extends Component {
   render() {
     const { selectedEDM, associations, entities, properties } = this.props.open;
-    console.log("selectedEDM: ", selectedEDM);
     // What data are we going to display?
     if (selectedEDM === PROPERTY) {
       var data = properties.map(item => (

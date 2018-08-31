@@ -3,7 +3,9 @@ import {
   GET_ENTITIES,
   GET_ASSOCIATIONS,
   SELECT_EDM,
-  SET_FOCUSED
+  SET_FOCUSED,
+  HAS_FOCUS,
+  DID_RENDER
 } from "../actions";
 
 const initialState = {
@@ -13,9 +15,10 @@ const initialState = {
   gotProperties: false,
   gotEntities: false,
   gotAssociations: false,
-  focused: null,
+  focused: {},
   gotFocused: false,
-  selectedEDM: null
+  selectedEDM: null,
+  rendered: false
 };
 
 export default function(state = initialState, action) {
@@ -34,13 +37,23 @@ export default function(state = initialState, action) {
       return {
         ...state,
         selectedEDM: action.payload,
-        gotFocused: false
+        focused: {}
       };
     case SET_FOCUSED:
+      console.log("Setting focsed");
       return {
         ...state,
-        focused: action.payload,
-        gotFocused: true
+        focused: action.payload
+      };
+    case HAS_FOCUS:
+      return {
+        ...state,
+        gotFocused: action.payload
+      };
+    case DID_RENDER:
+      return {
+        ...state,
+        rendered: action.payload
       };
     default:
       return state;

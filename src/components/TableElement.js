@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { setFocused } from "../actions";
+import { setFocused, hasFocus } from "../actions";
 
 class TableElement extends Component {
   constructor(props) {
@@ -11,7 +11,9 @@ class TableElement extends Component {
     this.handleClick = this.handleClick.bind(this);
   }
 
-  handleClick() {
+  handleClick(event) {
+    console.log("Click");
+    this.props.hasFocus(true);
     this.props.setFocused(this.state);
   }
 
@@ -33,5 +35,5 @@ const mapStateToProps = state => {
 
 export default connect(
   mapStateToProps,
-  { setFocused }
+  { setFocused, hasFocus }
 )(TableElement);

@@ -5,6 +5,7 @@ export const GET_ENTITIES = "get_entities";
 export const GET_ASSOCIATIONS = "get_associations";
 export const SELECT_EDM = "select_edm";
 export const SET_FOCUSED = "set_focused";
+export const HAS_FOCUS = "has_focus";
 
 const BASE_URL = "https://api.openlattice.com/datastore/edm/";
 const TYPE = "type";
@@ -38,16 +39,24 @@ export function getAssociations() {
   };
 }
 
-export function selectEDM(edm) {
+export function selectEDM(payload) {
   return {
     type: SELECT_EDM,
-    payload: edm
+    payload
   };
 }
 
 export function setFocused(payload) {
+  console.log("Set Focused");
   return {
     type: SET_FOCUSED,
+    payload
+  };
+}
+
+export function hasFocus(payload) {
+  return {
+    type: HAS_FOCUS,
     payload
   };
 }

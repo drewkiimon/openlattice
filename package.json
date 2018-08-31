@@ -32,7 +32,6 @@
     "lattice": "^0.37.0",
     "lattice-auth": "^0.7.0",
     "lattice-sagas": "^0.4.0",
-    "lodash": "^4.17.10",
     "loglevel": "^1.6.1",
     "moment": "^2.22.0",
     "polished": "^2.0.1",
