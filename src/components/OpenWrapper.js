@@ -115,7 +115,13 @@ class OpenWrapper extends Component {
 
     return (
       <WrapperDiv>
-        <div className="container-fluid h-100">
+        <div
+          className={
+            isDataReady
+              ? "container-fluid h-100"
+              : "container-fluid h-100 d-flex"
+          }
+        >
           {isDataReady ? (
             <div className="row h-100">
               <ColumnDiv className="col-6 offset-1 h-100 mr-2 p-3 ">
@@ -151,7 +157,7 @@ class OpenWrapper extends Component {
               </ColumnDiv>
             </div>
           ) : (
-            <Loading />
+            <Loading type={"bubbles"} color={"black"} />
           )}
         </div>
       </WrapperDiv>
