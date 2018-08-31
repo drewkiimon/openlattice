@@ -36,6 +36,19 @@ const ColumnDiv = styled.div`
   -webkit-box-shadow: 6px 9px 22px -10px rgba(0, 0, 0, 0.69);
   -moz-box-shadow: 6px 9px 22px -10px rgba(0, 0, 0, 0.69);
   box-shadow: 6px 9px 22px -10px rgba(0, 0, 0, 0.69);
+  overflow-y: scroll;
+  &::-webkit-scrollbar {
+    width: 10px;
+  }
+  &::-webkit-scrollbar-track {
+    background: #f1f1f1;
+  }
+  &::-webkit-scrollbar-thumb {
+    background: #888;
+  }
+  &::-webkit-scrollbar-thumb:hover {
+    background: #555;
+  }
 `;
 
 const InputTitle = styled.h5`
@@ -105,7 +118,7 @@ class OpenWrapper extends Component {
         <div className="container-fluid h-100">
           {isDataReady ? (
             <div className="row h-100">
-              <ColumnDiv className="col-6 offset-1 h-100 mr-2 p-3">
+              <ColumnDiv className="col-6 offset-1 h-100 mr-2 p-3 ">
                 <div className="row">
                   <div className="col">
                     <h2 className="text-center">EDM</h2>
