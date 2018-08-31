@@ -2,17 +2,23 @@ import React, { Component } from "react";
 import Select from "react-select";
 import styled from "styled-components";
 import { connect } from "react-redux";
+import { setFocused, hasFocus } from "../actions";
 
 const InputTitle = styled.h5`
   margin: 0;
   margin-top: 0.25em;
 `;
 
+const PROPERTY = "properties";
+const ENTITY = "entities";
+const ASSOCIATION = "associations";
+
 // We are going to filter things based off of what EDM was selected
 class Filter extends Component {
   constructor(props) {
     super(props);
     this.state = { selectedOption: null };
+    this.findData = this.findData.bind(this);
   }
 
   componentDidUpdate(prevProps) {
@@ -22,8 +28,28 @@ class Filter extends Component {
     }
   }
 
+  // Find data for our DetailedView
+  findData(id, type) {
+    const { properties, entities, associations } = this.props.open;
+    if (type === PROPERTY) {
+      const data = properties.filter(item => item.id === id)[0];
+      this.props.hasFocus(true);
+      this.props.setFocused({ data, type });
+    } else if (type === ENTITY) {
+      const data = entities.filter(item => item.id === id)[0];
+      this.props.hasFocus(true);
+      this.props.setFocused({ data, type });
+    } else if (type === ASSOCIATION) {
+      const data = associations.filter(item => item.entityType.id === id)[0];
+      this.props.hasFocus(true);
+      this.props.setFocused({ data, type });
+    }
+  }
+
   handleChange = selectedOption => {
     this.setState({ selectedOption });
+    const { gotFocused, focused, selectedEDM } = this.props.open;
+    this.findData(selectedOption.value, selectedEDM);
   };
 
   render() {
@@ -75,5 +101,5 @@ const mapStateToProps = state => {
 
 export default connect(
   mapStateToProps,
-  {}
+  { setFocused, hasFocus }
 )(Filter);

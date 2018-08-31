@@ -15,6 +15,7 @@ class TableElement extends Component {
   handleClick(event) {
     this.props.hasFocus(true);
     this.props.setFocused(this.state);
+    console.log("data", this.state.data);
   }
 
   render() {
