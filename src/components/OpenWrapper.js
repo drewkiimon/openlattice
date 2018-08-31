@@ -55,6 +55,7 @@ const InputTitle = styled.h5`
   margin: 0;
 `;
 
+// The main wrapper after the OpenLattice NavBar
 class OpenWrapper extends Component {
   constructor(props) {
     super(props);
@@ -70,12 +71,10 @@ class OpenWrapper extends Component {
   }
 
   componentDidUpdate() {
-    if (
-      this.state.selectedOption &&
-      this.state.selectedOption.value !== this.props.open.selectedEDM
-    ) {
+    const { selectedOption } = this.state;
+    const { selectedEDM } = this.props.open;
+    if (selectedOption && selectedOption.value !== selectedEDM) {
       // Set it the same as redux state
-      const { selectedEDM } = this.props.open;
       if (selectedEDM === "properties") {
         this.setState({
           selectedOption: { value: "properties", label: "Properties" }

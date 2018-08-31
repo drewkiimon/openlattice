@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import styled from "styled-components";
 import TableElement from "./TableElement";
 import { connect } from "react-redux";
+import { PROPERTY, ENTITY, ASSOCIATION } from "../edmTypes";
 
 const MyDiv = styled.div`
   max-height: 80%;
@@ -10,10 +11,6 @@ const MyDiv = styled.div`
     display: none;
   }
 `;
-
-const PROPERTY = "properties";
-const ENTITY = "entities";
-const ASSOCIATION = "associations";
 
 class TableView extends Component {
   render() {
@@ -24,7 +21,7 @@ class TableView extends Component {
       properties,
       filter
     } = this.props.open;
-    // What data are we going to display?
+    // What data are we going to display
     if (selectedEDM === PROPERTY) {
       var data = properties.map(item => (
         <TableElement

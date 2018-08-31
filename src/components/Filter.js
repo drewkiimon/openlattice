@@ -3,17 +3,13 @@ import Select from "react-select";
 import styled from "styled-components";
 import { connect } from "react-redux";
 import { setFocused, hasFocus, setFilter } from "../actions";
+import { PROPERTY, ENTITY, ASSOCIATION } from "../edmTypes";
 
 const InputTitle = styled.h5`
   margin: 0;
   margin-top: 0.25em;
 `;
 
-const PROPERTY = "properties";
-const ENTITY = "entities";
-const ASSOCIATION = "associations";
-
-// We are going to filter things based off of what EDM was selected
 class Filter extends Component {
   constructor(props) {
     super(props);

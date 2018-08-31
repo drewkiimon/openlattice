@@ -3,11 +3,9 @@ import { connect } from "react-redux";
 import styled from "styled-components";
 import Property from "./Property";
 import Entity from "./Entity";
+import { PROPERTY, ENTITY, ASSOCIATION } from "../edmTypes";
 
-const PROPERTY = "properties";
-const ENTITY = "entities";
-const ASSOCIATION = "associations";
-
+// Custom components made with styled-components
 const EDMTitle = styled.h3`
   text-decoration: underline;
   margin: 0;
@@ -53,6 +51,7 @@ const TableValues = styled.div`
   }
 `;
 
+// The right hand view to show details of clicked Typed
 class DetailedView extends Component {
   generateView(data, type) {
     if (type === PROPERTY) {

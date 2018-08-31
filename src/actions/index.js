@@ -20,7 +20,6 @@ export function getProperties() {
   };
 }
 
-// Get entities
 export function getEntities() {
   const request = axios.get(`${BASE_URL}entity/${TYPE}`);
 
@@ -30,7 +29,6 @@ export function getEntities() {
   };
 }
 
-// Get associations
 export function getAssociations() {
   const request = axios.get(`${BASE_URL}association/${TYPE}`);
 

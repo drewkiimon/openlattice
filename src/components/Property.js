@@ -24,8 +24,8 @@ class Property extends Component {
 
   componentDidMount() {
     // Search for the id
-    const allProperties = this.props.open.properties;
-    const property = allProperties.filter(item => item.id === this.props.id);
+    const { properties } = this.props.open;
+    const property = properties.filter(item => item.id === this.props.id);
     // Set it in state
     if (property.length === 1) {
       this.setState({ data: property[0], type: "properties", found: true });

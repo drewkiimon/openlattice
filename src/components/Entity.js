@@ -11,6 +11,7 @@ const Link = styled.span`
   }
 `;
 
+// Entity types to help us navigate EDM Types
 class Entity extends Component {
   constructor(props) {
     super(props);
@@ -23,10 +24,10 @@ class Entity extends Component {
   }
 
   componentDidMount() {
-    // Search for the id
+    // Search for the ID
     const { entities } = this.props.open;
     const entity = entities.filter(item => item.id === this.props.id);
-    // Set it in state
+    // Set it in state if we find only one
     if (entity.length === 1) {
       this.setState({ data: entity[0], type: "entities", found: true });
     }
@@ -35,7 +36,7 @@ class Entity extends Component {
   handleClick(event) {
     const { type, data } = this.state;
     const focusData = { type, data };
-    // Set EDM
+    // Set in Redux State
     this.props.selectEDM(type);
     this.props.hasFocus(true);
     this.props.setFocused(focusData);
