@@ -97,7 +97,7 @@ class DetailedView extends Component {
       const keyValues = key.map(item => <li key={item}>{item}</li>);
       const propertyValues = properties.map(item => <li key={item}>{item}</li>);
       const sources = src.map(item => <li key={item}>{item}</li>);
-      const destinations = src.map(item => <li key={item}>{item}</li>);
+      const destinations = dst.map(item => <li key={item}>{item}</li>);
       return (
         <div>
           <EDMTitle>Association Type</EDMTitle>
