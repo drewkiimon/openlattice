@@ -180,9 +180,17 @@ class DetailedView extends Component {
             </table>
           </TableValues>
           <LargerDetail>Sources</LargerDetail>
-          <ul>{sources}</ul>
+          <TableValues className="table-responsive">
+            <table className="table table-sm table-borderless">
+              <tbody>{sources}</tbody>
+            </table>
+          </TableValues>
           <LargerDetail>Destinations</LargerDetail>
-          <ul>{destinations}</ul>
+          <TableValues className="table-responsive">
+            <table className="table table-sm table-borderless">
+              <tbody>{destinations}</tbody>
+            </table>
+          </TableValues>
         </div>
       );
     }
