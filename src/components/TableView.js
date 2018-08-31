@@ -5,7 +5,6 @@ import { connect } from "react-redux";
 
 const MyDiv = styled.div`
   max-height: 80%;
-  background-color: gray;
   overflow-y: scroll;
 `;
 

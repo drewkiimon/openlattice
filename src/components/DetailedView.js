@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import styled from "styled-components";
+import Property from "./Property";
 
 const PROPERTY = "properties";
 const ENTITY = "entities";
@@ -56,7 +57,7 @@ class DetailedView extends Component {
       );
     } else if (type === ENTITY) {
       const { key, properties } = data;
-      const keyValues = key.map(item => <li key={item}>{item}</li>);
+      const keyValues = key.map(item => <Property key={item} id={item} />);
       const propertyValues = properties.map(item => <li key={item}>{item}</li>);
       return (
         <div>
