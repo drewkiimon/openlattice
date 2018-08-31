@@ -6,13 +6,13 @@ class TableElement extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      data: this.props.data
+      data: this.props.data,
+      type: this.props.type
     };
     this.handleClick = this.handleClick.bind(this);
   }
 
   handleClick(event) {
-    console.log("Click");
     this.props.hasFocus(true);
     this.props.setFocused(this.state);
   }

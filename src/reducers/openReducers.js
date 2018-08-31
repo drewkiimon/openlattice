@@ -40,7 +40,6 @@ export default function(state = initialState, action) {
         focused: {}
       };
     case SET_FOCUSED:
-      console.log("Setting focsed");
       return {
         ...state,
         focused: action.payload

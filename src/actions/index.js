@@ -47,7 +47,6 @@ export function selectEDM(payload) {
 }
 
 export function setFocused(payload) {
-  console.log("Set Focused");
   return {
     type: SET_FOCUSED,
     payload

@@ -22,14 +22,7 @@ const LargerDetail = styled.h4`
 `;
 
 class DetailedView extends Component {
-  constructor(props) {
-    super(props);
-    // this.generateView = this.generateView.bind(this);
-  }
-
-  generateView(data) {
-    var type = this.props.open.selectedEDM;
-    console.log("generateView", this.props.open);
+  generateView(data, type) {
     if (type === PROPERTY) {
       return (
         <div>
@@ -64,9 +57,7 @@ class DetailedView extends Component {
     } else if (type === ENTITY) {
       const { key, properties } = data;
       const keyValues = key.map(item => <li key={item}>{item}</li>);
-      console.log("Key");
       const propertyValues = properties.map(item => <li key={item}>{item}</li>);
-      console.log("props");
       return (
         <div>
           <EDMTitle>Entity Type</EDMTitle>
@@ -104,13 +95,9 @@ class DetailedView extends Component {
       const { key, properties } = entityType;
       const { src, dst } = data;
       const keyValues = key.map(item => <li key={item}>{item}</li>);
-      console.log("Key");
       const propertyValues = properties.map(item => <li key={item}>{item}</li>);
-      console.log("Props");
       const sources = src.map(item => <li key={item}>{item}</li>);
-      console.log("sources");
       const destinations = src.map(item => <li key={item}>{item}</li>);
-      console.log("dest");
       return (
         <div>
           <EDMTitle>Association Type</EDMTitle>
@@ -161,7 +148,7 @@ class DetailedView extends Component {
     } else {
       const { type, data } = focused;
 
-      return <div>{this.generateView(data)}</div>;
+      return <div>{this.generateView(data, type)}</div>;
     }
   }
 }

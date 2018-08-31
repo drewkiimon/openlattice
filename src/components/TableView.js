@@ -22,6 +22,7 @@ class TableView extends Component {
         <TableElement
           key={item.id}
           title={item.title}
+          type={PROPERTY}
           data={item}
           description={item.description}
         />
@@ -31,15 +32,18 @@ class TableView extends Component {
         <TableElement
           key={item.id}
           title={item.title}
+          type={ENTITY}
           data={item}
           description={item.description}
         />
       ));
     } else if (selectedEDM === ASSOCIATION) {
-      var data = associations.map(item => (
+      // Had to use index, since the same keys are also used in Entities
+      var data = associations.map((item, i) => (
         <TableElement
-          key={item.entityType.id}
+          key={i}
           title={item.entityType.title}
+          type={ASSOCIATION}
           data={item}
           description={item.entityType.description}
         />
