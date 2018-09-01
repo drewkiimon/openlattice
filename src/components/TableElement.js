@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Link } from "react-router-dom";
 import { setFocused, hasFocus } from "../actions";
 
 class TableElement extends Component {
@@ -21,10 +20,8 @@ class TableElement extends Component {
   render() {
     return (
       <tr onClick={this.handleClick}>
-        <Link to="/edm">
-          <td>{this.props.title}</td>
-          <td>{this.props.description}</td>
-        </Link>
+        <td>{this.props.title}</td>
+        <td>{this.props.description}</td>
       </tr>
     );
   }
