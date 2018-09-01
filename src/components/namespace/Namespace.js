@@ -1,9 +1,11 @@
 import React, { Component } from "react";
 import styled from "styled-components";
+import Select from "react-select";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { getProperties, getEntities, getAssociations } from "../../actions";
 
+import PropertyBinItem from "./PropertyBinItem";
 import Loading from "../Loading";
 
 const WrapperDiv = styled.div`
@@ -39,10 +41,14 @@ class Namespace extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      selectedPropertyOption: null,
+      selectedEntityOption: null,
       propertyNamespaces: {},
       gotPropertyNamespaces: false,
+      propertyBins: [],
       entityNamespaces: [],
-      gotEntityNamespaces: false
+      gotEntityNamespaces: false,
+      entityBins: []
     };
     this.createNamespaces = this.createNamespaces.bind(this);
   }
@@ -59,11 +65,16 @@ class Namespace extends Component {
       const { properties, entities } = this.props.open;
       const propertyNamespaces = this.createNamespaces(properties);
       const entityNamespaces = this.createNamespaces(entities);
+      const propertyBins = Object.keys(propertyNamespaces);
+      const entityBins = Object.keys(entityNamespaces);
+
       this.setState({
         propertyNamespaces,
         gotPropertyNamespaces: true,
+        propertyBins,
         entityNamespaces,
-        gotEntityNamespaces: true
+        gotEntityNamespaces: true,
+        entityBins
       });
     }
   }
@@ -93,14 +104,65 @@ class Namespace extends Component {
       this.props.getAssociations();
     }
   }
+
+  handlePropertyChange = selectedPropertyOption => {
+    this.setState({ selectedPropertyOption });
+    console.log("option selected: ", selectedPropertyOption);
+  };
+
+  handleEntityChange = selectedEntityOption => {
+    this.setState({ selectedEntityOption });
+    console.log("option selected: ", selectedEntityOption);
+  };
+
   render() {
-    const {
-      gotProperties,
-      gotEntities,
-      gotAssociations,
-      selectedEDM
-    } = this.props.open;
+    const { gotProperties, gotEntities, gotAssociations } = this.props.open;
     const isDataReady = gotProperties && gotEntities && gotAssociations;
+    const {
+      propertyBins,
+      entityBins,
+      selectedPropertyOption,
+      selectedEntityOption,
+      propertyNamespaces,
+      entityNamespaces
+    } = this.state;
+
+    var renderMe;
+
+    // Create Options
+    const propertyOptions = propertyBins.map(item => {
+      const { title } = item;
+      return { value: item, label: item };
+    });
+
+    const entityOptions = entityBins.map(item => {
+      const { title } = item;
+      return { value: item, label: item };
+    });
+
+    // Create
+    if (selectedPropertyOption) {
+      var propertiesToDisplay = [];
+      for (var i = 0; i < selectedPropertyOption.length; i++) {
+        let value = selectedPropertyOption[i].value;
+        let namespaceItems = propertyNamespaces[value];
+        propertiesToDisplay = [...propertiesToDisplay, ...namespaceItems];
+      }
+      renderMe = propertiesToDisplay.map(item => (
+        <PropertyBinItem
+          key={item.id}
+          title={item.title}
+          namespace={item.type.namespace}
+          data={item}
+        />
+      ));
+    }
+
+    if (selectedEntityOption) {
+      for (var i = 0; i < selectedEntityOption.length; i++) {
+        console.log(selectedEntityOption[i]);
+      }
+    }
 
     return (
       <WrapperDiv>
@@ -114,9 +176,46 @@ class Namespace extends Component {
           {isDataReady ? (
             <div className="row h-100">
               <ColumnDiv className="col-5 offset-1 h-100 mr-2 p-3">
-                Hello
+                <h2 className="text-center">Property Types</h2>
+                <div className="row">
+                  <div className="col">
+                    <Select
+                      value={selectedPropertyOption}
+                      onChange={this.handlePropertyChange}
+                      options={propertyOptions}
+                      isMulti={true}
+                    />
+                  </div>
+                </div>
+                <div className="row">
+                  <div className="col">
+                    <div className="table-responsive">
+                      <table className="table table-hover">
+                        <thead>
+                          <tr>
+                            <th>Title</th>
+                            <th>Namespace</th>
+                          </tr>
+                        </thead>
+                        <tbody>{renderMe}</tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
               </ColumnDiv>
-              <ColumnDiv className="col-5 h-100 p-3">Goodbye</ColumnDiv>
+              <ColumnDiv className="col-5 h-100 p-3">
+                <h2 className="text-center">Entity Types</h2>
+                <div className="row">
+                  <div className="col">
+                    <Select
+                      value={selectedEntityOption}
+                      onChange={this.handleEntityChange}
+                      options={entityOptions}
+                      isMulti={true}
+                    />
+                  </div>
+                </div>
+              </ColumnDiv>
             </div>
           ) : (
             <Loading type={"bubbles"} color={"black"} />
