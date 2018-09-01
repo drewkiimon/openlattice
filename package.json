@@ -36,6 +36,7 @@
     "moment": "^2.22.0",
     "polished": "^2.0.1",
     "react": "^16.4.0",
+    "react-chartkick": "^0.3.0",
     "react-dom": "^16.4.0",
     "react-loading": "^2.0.3",
     "react-redux": "^5.0.6",

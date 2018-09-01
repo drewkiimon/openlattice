@@ -1,7 +1,9 @@
 import React, { Component } from "react";
 import { Redirect } from "react-router-dom";
+import { connect } from "react-redux";
+import { setFocused, hasFocus, selectEDM } from "../../actions";
 
-class PropertyBinItem extends Component {
+class BinItem extends Component {
   constructor(props) {
     super(props);
 
@@ -13,13 +15,15 @@ class PropertyBinItem extends Component {
   }
 
   handleClick() {
+    const { data, type } = this.props;
+    this.props.selectEDM(type);
+    this.props.hasFocus(true);
+    this.props.setFocused({ data, type });
     this.setState({ clicked: true });
-    console.log(this.state.data);
   }
 
   render() {
     if (this.state.clicked) {
-      this.setState({ clicked: false });
       return <Redirect push to="/edm" />;
     }
     return (
@@ -31,4 +35,13 @@ class PropertyBinItem extends Component {
   }
 }
 
-export default PropertyBinItem;
+const mapStateToProps = state => {
+  return {
+    open: state.open
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  { setFocused, hasFocus, selectEDM }
+)(BinItem);

@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import Select from "react-select";
 import { connect } from "react-redux";
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 import {
   getProperties,
   getEntities,
@@ -73,7 +74,11 @@ class OpenWrapper extends Component {
   componentDidUpdate() {
     const { selectedOption } = this.state;
     const { selectedEDM } = this.props.open;
-    if (selectedOption && selectedOption.value !== selectedEDM) {
+    // Second condition is for when we come from our namespace
+    if (
+      (selectedOption && selectedOption.value !== selectedEDM) ||
+      (selectedEDM && !selectedOption)
+    ) {
       // Set it the same as redux state
       if (selectedEDM === "properties") {
         this.setState({
@@ -127,6 +132,11 @@ class OpenWrapper extends Component {
                 <div className="row">
                   <div className="col">
                     <h2 className="text-center">EDM</h2>
+                  </div>
+                </div>
+                <div className="row">
+                  <div className="col">
+                    <Link to="namespace">View Namespace</Link>
                   </div>
                 </div>
                 <div className="row">

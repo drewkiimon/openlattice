@@ -1,11 +1,13 @@
 import React, { Component } from "react";
 import styled from "styled-components";
 import Select from "react-select";
+import { ColumnChart } from "react-chartkick";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { getProperties, getEntities, getAssociations } from "../../actions";
+import { PROPERTY, ENTITY, ASSOCIATION } from "../../edmTypes";
 
-import PropertyBinItem from "./PropertyBinItem";
+import BinItem from "./BinItem";
 import Loading from "../Loading";
 
 const WrapperDiv = styled.div`
@@ -48,7 +50,8 @@ class Namespace extends Component {
       propertyBins: [],
       entityNamespaces: [],
       gotEntityNamespaces: false,
-      entityBins: []
+      entityBins: [],
+      here: false
     };
     this.createNamespaces = this.createNamespaces.bind(this);
   }
@@ -74,7 +77,8 @@ class Namespace extends Component {
         propertyBins,
         entityNamespaces,
         gotEntityNamespaces: true,
-        entityBins
+        entityBins,
+        here: false
       });
     }
   }
@@ -102,17 +106,18 @@ class Namespace extends Component {
       this.props.getProperties();
       this.props.getEntities();
       this.props.getAssociations();
+    } else {
+      // We are using this to force a render, for when we come from edm page
+      this.setState({ here: true });
     }
   }
 
   handlePropertyChange = selectedPropertyOption => {
     this.setState({ selectedPropertyOption });
-    console.log("option selected: ", selectedPropertyOption);
   };
 
   handleEntityChange = selectedEntityOption => {
     this.setState({ selectedEntityOption });
-    console.log("option selected: ", selectedEntityOption);
   };
 
   render() {
@@ -127,7 +132,7 @@ class Namespace extends Component {
       entityNamespaces
     } = this.state;
 
-    var renderMe;
+    var renderProperties, renderEntities;
 
     // Create Options
     const propertyOptions = propertyBins.map(item => {
@@ -143,25 +148,43 @@ class Namespace extends Component {
     // Create
     if (selectedPropertyOption) {
       var propertiesToDisplay = [];
+      var propertyChartData = [];
       for (var i = 0; i < selectedPropertyOption.length; i++) {
         let value = selectedPropertyOption[i].value;
         let namespaceItems = propertyNamespaces[value];
+        propertyChartData.push([value, namespaceItems.length]);
         propertiesToDisplay = [...propertiesToDisplay, ...namespaceItems];
       }
-      renderMe = propertiesToDisplay.map(item => (
-        <PropertyBinItem
+      renderProperties = propertiesToDisplay.map(item => (
+        <BinItem
           key={item.id}
           title={item.title}
           namespace={item.type.namespace}
           data={item}
+          type={PROPERTY}
         />
       ));
     }
 
     if (selectedEntityOption) {
+      var entitiesToDisplay = [];
+      var entityChartData = [];
       for (var i = 0; i < selectedEntityOption.length; i++) {
-        console.log(selectedEntityOption[i]);
+        let value = selectedEntityOption[i].value;
+        let namespaceItems = entityNamespaces[value];
+        entityChartData.push([value, namespaceItems.length]);
+        entitiesToDisplay = [...entitiesToDisplay, ...namespaceItems];
       }
+
+      renderEntities = entitiesToDisplay.map(item => (
+        <BinItem
+          key={item.id}
+          title={item.title}
+          namespace={item.type.namespace}
+          data={item}
+          type={PROPERTY}
+        />
+      ));
     }
 
     return (
@@ -176,6 +199,9 @@ class Namespace extends Component {
           {isDataReady ? (
             <div className="row h-100">
               <ColumnDiv className="col-5 offset-1 h-100 mr-2 p-3">
+                <div className="row">
+                  <ColumnChart height="150px" data={propertyChartData} />
+                </div>
                 <h2 className="text-center">Property Types</h2>
                 <div className="row">
                   <div className="col">
@@ -197,13 +223,16 @@ class Namespace extends Component {
                             <th>Namespace</th>
                           </tr>
                         </thead>
-                        <tbody>{renderMe}</tbody>
+                        <tbody>{renderProperties}</tbody>
                       </table>
                     </div>
                   </div>
                 </div>
               </ColumnDiv>
               <ColumnDiv className="col-5 h-100 p-3">
+                <div className="row">
+                  <ColumnChart height="150px" data={entityChartData} />
+                </div>
                 <h2 className="text-center">Entity Types</h2>
                 <div className="row">
                   <div className="col">
@@ -213,6 +242,21 @@ class Namespace extends Component {
                       options={entityOptions}
                       isMulti={true}
                     />
+                  </div>
+                </div>
+                <div className="row">
+                  <div className="col">
+                    <div className="table-responsive">
+                      <table className="table table-hover">
+                        <thead>
+                          <tr>
+                            <th>Title</th>
+                            <th>Namespace</th>
+                          </tr>
+                        </thead>
+                        <tbody>{renderEntities}</tbody>
+                      </table>
+                    </div>
                   </div>
                 </div>
               </ColumnDiv>
