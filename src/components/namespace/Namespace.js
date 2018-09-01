@@ -9,11 +9,16 @@ import { PROPERTY, ENTITY, ASSOCIATION } from "../../edmTypes";
 
 import BinItem from "./BinItem";
 import Loading from "../Loading";
+import Navbar from "../Navbar";
 
 const WrapperDiv = styled.div`
   height: 92%;
   background-color: #e0ffff;
   padding: 0.5em 0;
+`;
+
+const MainColumn = styled.div`
+  height: 92% !important;
 `;
 
 const ColumnDiv = styled.div`
@@ -196,13 +201,14 @@ class Namespace extends Component {
               : "container-fluid h-100 d-flex"
           }
         >
+          {isDataReady ? <Navbar /> : ""}
           {isDataReady ? (
-            <div className="row h-100">
+            <MainColumn className="row ">
               <ColumnDiv className="col-5 offset-1 h-100 mr-2 p-3">
                 <div className="row">
                   <ColumnChart height="150px" data={propertyChartData} />
                 </div>
-                <h2 className="text-center">Property Types</h2>
+                <h2 className="text-center">Property Namespaces</h2>
                 <div className="row">
                   <div className="col">
                     <Select
@@ -233,7 +239,7 @@ class Namespace extends Component {
                 <div className="row">
                   <ColumnChart height="150px" data={entityChartData} />
                 </div>
-                <h2 className="text-center">Entity Types</h2>
+                <h2 className="text-center">Entity Namespaces</h2>
                 <div className="row">
                   <div className="col">
                     <Select
@@ -260,7 +266,7 @@ class Namespace extends Component {
                   </div>
                 </div>
               </ColumnDiv>
-            </div>
+            </MainColumn>
           ) : (
             <Loading type={"bubbles"} color={"black"} />
           )}

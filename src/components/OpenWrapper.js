@@ -16,6 +16,7 @@ import Loading from "./Loading";
 import Filter from "./Filter";
 import TableView from "./TableView";
 import DetailedView from "./DetailedView";
+import Navbar from "./Navbar";
 
 const options = [
   { value: "properties", label: "Properties" },
@@ -27,6 +28,10 @@ const WrapperDiv = styled.div`
   height: 92%;
   background-color: #e0ffff;
   padding: 0.5em 0;
+`;
+
+const MainColumn = styled.div`
+  height: 92% !important;
 `;
 
 const ColumnDiv = styled.div`
@@ -126,19 +131,14 @@ class OpenWrapper extends Component {
               : "container-fluid h-100 d-flex"
           }
         >
+          {isDataReady ? <Navbar /> : ""}
+
           {isDataReady ? (
-            <div className="row h-100">
+            <MainColumn className="row">
               <ColumnDiv className="col-6 offset-1 h-100 mr-2 p-3 ">
                 <div className="row">
                   <div className="col">
                     <h2 className="text-center">EDM</h2>
-                  </div>
-                </div>
-                <div className="row">
-                  <div className="col">
-                    <Link to="/namespace">
-                      <button className="btn btn-block">To Namespace</button>
-                    </Link>
                   </div>
                 </div>
                 <div className="row">
@@ -166,7 +166,7 @@ class OpenWrapper extends Component {
                   </div>
                 </div>
               </ColumnDiv>
-            </div>
+            </MainColumn>
           ) : (
             <Loading type={"bubbles"} color={"black"} />
           )}
