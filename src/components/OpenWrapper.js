@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import Select from "react-select";
 import { connect } from "react-redux";
 import styled from "styled-components";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import {
   getProperties,
   getEntities,
@@ -136,7 +136,9 @@ class OpenWrapper extends Component {
                 </div>
                 <div className="row">
                   <div className="col">
-                    <Link to="namespace">View Namespace</Link>
+                    <Link to="/namespace">
+                      <button className="btn btn-block">To Namespace</button>
+                    </Link>
                   </div>
                 </div>
                 <div className="row">
