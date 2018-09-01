@@ -181,7 +181,7 @@ class DetailedView extends Component {
           <SmallDetail>Key</SmallDetail>
           <TableValues className="table-responsive">
             <table className="table table-sm table-borderless">
-              <tbody> {keyValues}</tbody>
+              <tbody>{keyValues}</tbody>
             </table>
           </TableValues>
           <SmallDetail>Properties</SmallDetail>
